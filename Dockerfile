@@ -29,6 +29,9 @@ RUN curl -J -L -s -k \
 &&  mv /var/www/omeka-s /var/www/html \
 &&  chown -R www-data:www-data /var/www/html
 
+COPY ./database.ini /var/www/html/config/database.ini
+COPY ./imagemagick-policy.xml /etc/ImageMagick/policy.xml
+
 VOLUME /var/www/html
 
 CMD ["apache2-foreground"]
