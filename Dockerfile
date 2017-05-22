@@ -31,6 +31,7 @@ RUN curl -J -L -s -k \
 
 COPY ./database.ini /var/www/html/config/database.ini
 COPY ./imagemagick-policy.xml /etc/ImageMagick/policy.xml
+COPY ./.htaccess /var/www/html/.htaccess
 
 VOLUME /var/www/html
 
