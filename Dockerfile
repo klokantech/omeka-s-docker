@@ -9,7 +9,7 @@ RUN apt-get -qq update && apt-get -qq -y --no-install-recommends install \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
-    libpng12-dev \
+    libpng-dev \
     libjpeg-dev \
     libmemcached-dev \
     zlib1g-dev \
@@ -21,7 +21,7 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 RUN curl -J -L -s -k \
-    'https://github.com/omeka/omeka-s/releases/download/v1.0.0-beta3/omeka-s.zip' \
+    'https://github.com/omeka/omeka-s/releases/download/v2.0.0/omeka-s-2.0.0.zip' \
     -o /var/www/omeka-s.zip \
 &&  unzip -q /var/www/omeka-s.zip -d /var/www/ \
 &&  rm /var/www/omeka-s.zip \
@@ -29,7 +29,7 @@ RUN curl -J -L -s -k \
 &&  mv /var/www/omeka-s /var/www/html \
 &&  chown -R www-data:www-data /var/www/html
 
-COPY ./database.ini /var/www/html/config/database.ini
+COPY ./database1.ini /var/www/html/config/database.ini
 COPY ./imagemagick-policy.xml /etc/ImageMagick/policy.xml
 COPY ./.htaccess /var/www/html/.htaccess
 
