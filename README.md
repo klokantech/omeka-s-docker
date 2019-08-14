@@ -10,14 +10,15 @@ It creates 3 containers:
 `docker-compose up`
 
 
-Creacion de la imagen 
-docker build -t <nombreimagen>
-
+To build the image 
+docker build -t "name"
 
 docker images  
 
 docker-compose up 
 
+Updated DOCKER IMAGE in https://hub.docker.com/r/horaciod/omekasid
 
 
-actualizado
+
+
