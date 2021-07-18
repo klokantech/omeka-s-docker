@@ -1,4 +1,4 @@
-Omeka-S in docker
+Omeka-S in docker (version 3.01  abril 2021)
 
 There is also example of docker-compose.yml file which can be used for development.
 It creates 3 containers:
@@ -8,3 +8,17 @@ It creates 3 containers:
 - omeka-s behind apache (modules or themes can be inserted via docker volumes
 
 `docker-compose up`
+
+
+To build the image 
+docker build -t "name"
+
+docker images  
+
+docker-compose up 
+
+Updated DOCKER IMAGE in https://hub.docker.com/r/horaciod/omekasid
+
+
+
+

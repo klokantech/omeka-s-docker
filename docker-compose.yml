@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     build: ./
-    image: klokantech/omeka-s
+    image: horaciod/omeka3sid:latest
     ports:
       - "80:80"
     volumes:
