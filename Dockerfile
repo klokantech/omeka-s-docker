@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.4-apache
 
 RUN a2enmod rewrite
 
@@ -9,19 +9,20 @@ RUN apt-get -qq update && apt-get -qq -y --no-install-recommends install \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
-    libpng12-dev \
+    libpng-dev \
     libjpeg-dev \
     libmemcached-dev \
     zlib1g-dev \
     imagemagick
 
 # install the PHP extensions we need
-RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
-    pdo pdo_mysql mysqli gd
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN pecl install mcrypt-1.0.4 
+RUN docker-php-ext-enable mcrypt
+RUN docker-php-ext-install -j$(nproc) iconv pdo pdo_mysql mysqli gd
+RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 
 RUN curl -J -L -s -k \
-    'https://github.com/omeka/omeka-s/releases/download/v1.0.0-beta3/omeka-s.zip' \
+    'https://github.com/omeka/omeka-s/releases/download/v3.1.1/omeka-s-3.1.1.zip' \
     -o /var/www/omeka-s.zip \
 &&  unzip -q /var/www/omeka-s.zip -d /var/www/ \
 &&  rm /var/www/omeka-s.zip \
