@@ -1,10 +1,12 @@
-version: '2'
+version: '2.4'
 
 services:
   db:
-    image: mysql:5.7
-    restart: always
-    environment:
+    image: mariadb:10.6
+    volumes:
+      - omekadb:/var/lib/mysql
+    restart: unless-stopped
+    environment: # the mysql user is 'root'
       MYSQL_ROOT_PASSWORD: omeka
       MYSQL_DATABASE: omeka
       MYSQL_USER: omeka
@@ -12,21 +14,21 @@ services:
 
   db_admin:
     image: phpmyadmin/phpmyadmin
-    restart: always
-    links:
-     - db:db
+    restart: unless-stopped
     ports:
       - "8080:80"
 
-  omeka-s:
+  omeka:
     depends_on:
       - db
-    build: ./
-    image: klokantech/omeka-s
+    build: .
+    image: fsg/omeka-s
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - ./modules/:/var/www/html/modules/
       - ./themes/custom/:/var/www/html/themes/custom/
-    restart: always
+    restart: unless-stopped
 
+volumes:
+  omekadb:
