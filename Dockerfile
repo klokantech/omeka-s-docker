@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.4-apache
 
 RUN a2enmod rewrite
 
@@ -16,12 +16,12 @@ RUN apt-get -qq update && apt-get -qq -y --no-install-recommends install \
     imagemagick
 
 # install the PHP extensions we need
-RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
+RUN docker-php-ext-install -j$(nproc) iconv  \
     pdo pdo_mysql mysqli gd
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ 
 RUN docker-php-ext-install -j$(nproc) gd
 RUN curl -J -L -s -k \
-    'https://github.com/omeka/omeka-s/releases/download/v2.0.0/omeka-s-2.0.0.zip' \
+    'https://github.com/omeka/omeka-s/releases/download/v3.2.0/omeka-s-3.2.0.zip' \
     -o /var/www/omeka-s.zip \
 &&  unzip -q /var/www/omeka-s.zip -d /var/www/ \
 &&  rm /var/www/omeka-s.zip \

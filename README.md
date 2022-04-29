@@ -1,4 +1,4 @@
-Omeka-S in docker (version 3.01 marzo 2021)
+Omeka-S in docker (version 3.2 abril 2022)
 
 There is also example of docker-compose.yml file which can be used for development.
 It creates 3 containers:
